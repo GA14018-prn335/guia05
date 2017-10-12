@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Meta</title>
+    </h:head>
+    <h:body>
+        <h3>Meta</h3>
+        <h:selectBooleanCheckbox value="prueva" label="mostrar"/><h:outputText value="Mostrar Solamente Los Utilizados" />
+        
+        <h:form>
+            <p:dataTable value="#{frmMeta.metas}" var="m" paginator="true" paginatorPosition="bottom" rows="5" >
+                <p:column headerText="id">
+                    <h:outputText value="#{m.idMeta}"></h:outputText>
+                </p:column>
+                <p:column headerText="nombre">
+                    <h:outputText value="#{m.nombre}"></h:outputText>
+                </p:column>
+                <p:column headerText="activo">
+                    <h:outputText value="#{m.activo}"></h:outputText>
+                </p:column>
+                <p:column headerText="descripcion">
+                    <h:outputText value="#{m.descripcion}"></h:outputText>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        
+        <f:view>
+            <h:form id="paneles">
+                <h3><h:outputText value="Crear Nuevo Registro"/></h3>
+                <p:panelGrid id="panel" columns="2">
+                    <p:outputLabel value="Nombre:" for="nombre" />
+                    <p:inputText id="nombre" value="#{frmMeta.m.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
+                    <p:outputLabel value="Activo:" for="activo" />
+                    <p:selectBooleanCheckbox id="activo" value="#{frmMeta.m.activo}" />
+                    <p:outputLabel value="Descripcion:" for="descripcion" />
+                    <p:inputTextarea id="descripcion" value="#{frmMeta.m.descripcion}" title="Descripcion" />
+                </p:panelGrid>
+                <p:panelGrid id="c_guardar" columns="2">
+                    
+                    <p:commandButton value="Limpiar" icon="ui-icon-document" >
+                        <p:ajax listener="#{frmMeta.limpiar()}" immediate="true" update="paneles"></p:ajax>
+                    </p:commandButton>
+                    
+                    <p:commandButton value="Guardar" icon="ui-icon-disk" ajax="true" actionListener="#{frmMeta.guardar()}" />
+                       
+                    
+                </p:panelGrid>
+            </h:form>
+        </f:view>
+        
+    </h:body>
+</html>
+
